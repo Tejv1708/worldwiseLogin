@@ -11,6 +11,14 @@ const router = express.Router();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+//http://127.0.0.1:5174/
+app.use(
+  cors({
+    origin: "http://127.0.0.1:5174",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 // 1 - MIDDLEWARE
 app.use(morgan("dev"));
@@ -27,7 +35,4 @@ app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));
 });
 
-app.use("/.netlify/functions/api", router);
-
-export const handle = serverless(app);
 export default app;

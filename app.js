@@ -2,8 +2,7 @@ import express from "express";
 import userRoute from "./routes/userRoute.js";
 import AppError from "./utils/AppError.js";
 import morgan from "morgan";
-import serverless from "serverless-http";
-
+import cors from "cors";
 const app = express();
 
 const router = express.Router();

@@ -29,7 +29,10 @@ app.use((req, res, next) => {
 });
 
 app.use("/user", userRoute);
-
+app.get("/", (req, res) => {
+  console.log(req);
+  return res.status(200).send("Welcome to Authorization and Authentication ");
+});
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));
 });

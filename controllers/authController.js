@@ -3,13 +3,13 @@ import AppError from "../utils/AppError.js";
 import catchAsync from "../utils/catchAsync.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { promisify } from "util";
 
 dotenv.config({ path: "./config.env" });
-const expiresIn = process.env.JWT_COOKIE_EXPIRES_IN;
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn,
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
 const createSendToken = (user, statusCode, res) => {
@@ -53,8 +53,7 @@ export const userLogin = async (req, res, next) => {
   if (!email || !password) {
     return next(new AppError("Please provide email and password", 400));
   }
-  createSendToken(newUser, 201, res);
-  // next();
+  createSendToken(userData, 201, res);
 };
 
 export const protect = catchAsync(async (req, res, next) => {

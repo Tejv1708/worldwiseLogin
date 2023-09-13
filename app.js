@@ -5,7 +5,6 @@ import morgan from "morgan";
 import cors from "cors";
 const app = express();
 
-const router = express.Router();
 //Develpment Logging
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

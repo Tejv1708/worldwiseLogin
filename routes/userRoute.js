@@ -8,6 +8,7 @@ import {
   getAllUser,
   getUser,
   deleteMe,
+  updateMe,
 } from "../controllers/userController.js";
 const router = express.Router();
 
@@ -24,6 +25,10 @@ router.post("/login", userLogin);
 router.get("/all", protect, getAllUser);
 
 //Get A user using id
-router.route("/:id").get(protect, getUser).delete(protect, deleteMe);
+router
+  .route("/:id")
+  .get(protect, getUser)
+  .delete(protect, deleteMe)
+  .put(protect, updateMe);
 
 export default router;
